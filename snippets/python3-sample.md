@@ -58,14 +58,14 @@ else:
 ```Python
 import requests
 
-baseUrl = "http://services.odata.org/v4/TripPinServiceRW/"
+baseUrl = "https://services.odata.org/v4/(S(dhzln0mseufepcdhv3dzuuh4))/TripPinServiceRW/"
 
 newPerson = {
     "UserName":"jeanbon",
     "FirstName":"Jean",
     "LastName":"Bon",
     "Emails":[
-        "jeanbon@example.com"
+        "jeanbon2@example.com"
     ],
     "AddressInfo":[
         {
@@ -79,11 +79,18 @@ newPerson = {
     ],
     "Gender": "Male"
 }
+headers= {
+    'OData-Version': '4.0',
+    'OData-MaxVersion': '4.0'
+}
 
-response = requests.post(baseUrl +"People", json=newPerson)
+response = requests.post(baseUrl +"People",headers=headers, json=newPerson, allow_redirects=False)
 
 if response.status_code != 201:
     print("error: " + str(response.status_code))
+    print(response.request.method)
+    print(response.request.url)
+    print(response.headers)
     print(response.text)
 else:
     print("success")
@@ -111,7 +118,7 @@ else:
 
 ```
 
-# Step 5: Invoking a function
+# Step 6: Invoking a function
 ```Python
 import requests
 
