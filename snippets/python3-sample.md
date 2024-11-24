@@ -109,7 +109,7 @@ payload = {
 
 response = requests.post(baseUrl +"People('lewisblack')/Trips/$ref", json=payload)
 
-if response.status_code != 201:
+if response.status_code != 204:
     print("error: " + str(response.status_code))
     print(response.text)
 else:
